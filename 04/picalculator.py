@@ -16,7 +16,7 @@ def leibnizPi(iterations):
             pi -= dividend / divisor
 
         divisor += 2
-        iteration =+ 1
+        iteration += 1
         odd = not odd
 
     print('Iterations = ' + str(iterations))
@@ -32,9 +32,9 @@ def nilakanthaPi(iterations):
 
     while iteration < iterations:
         if odd:
-            pi += dividend / divisor * (divisor + 1) * (divisor + 2)
+            pi += dividend / (divisor * (divisor + 1) * (divisor + 2))
         else:
-            pi -= dividend / divisor * (divisor + 1) * (divisor + 2)
+            pi -= dividend / (divisor * (divisor + 1) * (divisor + 2))
 
         divisor += 2
         iteration += 1
@@ -48,13 +48,15 @@ def testNewtonPi(init):
 
 
 def testLeibnizPi(iterations):
+    print("\nTest Leibniz Pi:")
     print("Expected iterations = " + str(iterations) +
           "\nPi = " + str(leibnizPi(iterations)))
 
 
 def testNilakanthaPi(iterations):
+    print("\nTest Nilakantha Pi:")
     print("Expected iterations = " + str(iterations) +
-          "\nPi = " + str(testNilakanthaPi(iterations)))
+          "\nPi = " + str(nilakanthaPi(iterations)))
 
 
 testLeibnizPi(5000000)
