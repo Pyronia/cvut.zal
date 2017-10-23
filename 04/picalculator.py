@@ -1,5 +1,15 @@
-def newtonPi(init):
-    pass
+from math import sin
+from math import cos
+
+
+def newtonPi(k):
+    kPlusOne = k - sin(k) / cos(k)
+
+    while kPlusOne != k:
+        k = kPlusOne
+        kPlusOne = kPlusOne - sin(kPlusOne) / cos(kPlusOne)
+
+    return kPlusOne
 
 
 def leibnizPi(iterations):
@@ -26,7 +36,7 @@ def leibnizPi(iterations):
 def nilakanthaPi(iterations):
     dividend = 4
     divisor = 2
-    iteration = 0
+    iteration = 1
     pi = 3
     odd = True
 
@@ -44,7 +54,8 @@ def nilakanthaPi(iterations):
     return pi
 
 def testNewtonPi(init):
-    pass
+    print("\nTest Newton Pi:")
+    print("\nPi = " + str(newtonPi(init)))
 
 
 def testLeibnizPi(iterations):
@@ -60,4 +71,5 @@ def testNilakanthaPi(iterations):
 
 
 testLeibnizPi(5000000)
-testNilakanthaPi(5000000)
+testNilakanthaPi(1)
+testNewtonPi(-3.0)
