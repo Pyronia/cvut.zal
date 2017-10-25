@@ -92,7 +92,7 @@ def secondRadix(x):
 def magic(x, y, z, k):
     try:
         l = addition(x, k)
-        m = addition(y + z)
+        m = addition(y, z)
         return addition(division(l, m), 1)
 
     except Exception:
@@ -100,18 +100,24 @@ def magic(x, y, z, k):
 
 
 def control(a, x, y, z, k):
-    a = str(a)
+    if a == 'ADDITION':
+        return addition(x, y)
+    if a == 'SUBTRACTION':
+        return subtraction(x, y)
+    if a == 'MULTIPLICATION':
+        return multiplication(x, y)
+    if a == 'DIVISION':
+        return division(x, y)
+    if a == 'MOD':
+        return modulo(x, y)
+    if a == 'POWER':
+        return power(x, y)
+    if a == 'SECONDRADIX':
+        return secondRadix(x)
+    if a == 'MAGIC':
+        return magic(x, y, z, k)
 
-    return {
-        '1': addition(x, y),
-        '2': subtraction(x, y),
-        '3': multiplication(x, y),
-        '4': division(x, y),
-        '5': modulo(x, y),
-        '6': power(x, y),
-        '8': secondRadix(x),
-        '9': magic(x, y, z, k),
-    }[a]
+    raise ValueError('This operation is not supported for given input parameters')
 
 
 def runTests():
@@ -120,7 +126,7 @@ def runTests():
         expected = 3
         if result != expected:
             print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
-            print('division(6, 2), expected: 3 actual: ' + str(result))
+            print('division(6, 2), expected: ' + str(expected) + ' actual: ' + str(result))
             print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
     except ValueError:
         print('\n*/*/*/*/* UNEXPECTED ERROR */*/*/*/*')
@@ -132,7 +138,7 @@ def runTests():
         expected = 1.75
         if result != expected:
             print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
-            print('division(\'3.5\', 2), expected: 1.75 actual: ' + str(result))
+            print('division(\'3.5\', 2), expected: ' + str(expected) + ' actual: ' + str(result))
             print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
     except ValueError:
         print('\n*/*/*/*/* UNEXPECTED ERROR */*/*/*/*')
@@ -157,7 +163,7 @@ def runTests():
         expected = 25
         if result != expected:
             print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
-            print('power(5, 2), expected: 25 actual: ' + str(result))
+            print('power(5, 2), expected: ' + str(expected) + ' actual: ' + str(result))
             print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
     except ValueError:
         print('power(5, 2): ValueError')
@@ -167,7 +173,7 @@ def runTests():
         expected = 3
         if result != expected:
             print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
-            print('secondRadix(9), expected: 3 actual: ' + str(result))
+            print('secondRadix(9), expected: ' + str(expected) + ' actual: ' + str(result))
             print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
     except ValueError:
         print('secondRadix(9): ValueError')
@@ -177,15 +183,39 @@ def runTests():
         expected = 2.25
         if result != expected:
             print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
-            print('secondRadix(9), expected: 2.25 actual: ' + str(result))
+            print('secondRadix(9), expected: ' + str(expected) + ' actual: ' + str(result))
             print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
     except ValueError:
         print('secondRadix(9): ValueError')
 
     try:
-        control(9, 1, 2, 3, 4)
+        result = control('ADDITION', 2, 3, 4, 5)
+        expected = 5
+        if result != expected:
+            print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
+            print('control(\'ADDITION\', 2, 3, 4, 5), expected: ' + str(expected) + ' actual: ' + str(result))
+            print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
     except ValueError:
-        print('control(9, 1, 2, 3, 4): ValueError')
+        print('control(\'ADDITION\', 2, 3, 4, 5): ValueError')
 
+    try:
+        result = control('ADDITION', -1, 1, 1, -1)
+        expected = 0
+        if result != expected:
+            print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
+            print('control(\'ADDITION\', -1, 1, 1, -1), expected: ' + str(expected) + ' actual: ' + str(result))
+            print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
+    except ValueError:
+        print('control(\'ADDITION\', -1, 1, 1, -1): ValueError')
+
+    try:
+        result = control('SUBTRACTION', 2, 3, 4, 5)
+        expected = -1
+        if result != expected:
+            print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
+            print('control(\'SUBTRACTION\', 2, 3, 4, 5), expected: ' + str(expected) + ' actual: ' + str(result))
+            print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
+    except ValueError:
+        print('control(\'SUBTRACTION\', 2, 3, 4, 5): ValueError')
 
 runTests()
