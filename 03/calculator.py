@@ -7,6 +7,7 @@ def addition(x, y):
         y = float(y)
         result = x + y
         return result
+
     except Exception:
         raise ValueError('This operation is not supported for given input parameters')
 
@@ -16,6 +17,7 @@ def subtraction(x, y):
         x = float(x)
         y = float(y)
         return x - y
+
     except Exception:
         raise ValueError('This operation is not supported for given input parameters')
 
@@ -25,6 +27,7 @@ def multiplication(x, y):
         x = float(x)
         y = float(y)
         return x * y
+
     except Exception:
         raise ValueError('This operation is not supported for given input parameters')
 
@@ -34,6 +37,7 @@ def division(x, y):
         x = float(x)
         y = float(y)
         return x / y
+
     except Exception:
         raise ValueError('This operation is not supported for given input parameters')
 
@@ -46,6 +50,7 @@ def modulo(x, y):
             raise ValueError
         else:
             return x % y
+
     except Exception:
         raise ValueError('This operation is not supported for given input parameters')
 
@@ -54,6 +59,7 @@ def secondPower(x):
     try:
         x = float(x)
         return x * x
+
     except Exception:
         raise ValueError('This operation is not supported for given input parameters')
 
@@ -66,6 +72,7 @@ def power(x, y):
             raise ValueError
         else:
             return float(x ** y)
+
     except Exception:
         raise ValueError('This operation is not supported for given input parameters')
 
@@ -77,16 +84,34 @@ def secondRadix(x):
             raise ValueError
         else:
             return math.sqrt(x)
+
     except Exception:
         raise ValueError('This operation is not supported for given input parameters')
 
 
 def magic(x, y, z, k):
-    pass
+    try:
+        l = addition(x, k)
+        m = addition(y + z)
+        return addition(division(l, m), 1)
+
+    except Exception:
+        raise ValueError('This operation is not supported for given input parameters')
 
 
 def control(a, x, y, z, k):
-    pass
+    a = str(a)
+
+    return {
+        '1': addition(x, y),
+        '2': subtraction(x, y),
+        '3': multiplication(x, y),
+        '4': division(x, y),
+        #'5': modulo(x, y),
+        '6': power(x, y),
+        '8': secondRadix(x),
+        '9': magic(x, y, z, k),
+    }[a]
 
 
 def runTests():
@@ -156,6 +181,11 @@ def runTests():
             print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
     except ValueError:
         print('secondRadix(9): ValueError')
+
+    try:
+        control(9, 1, 2, 3, 4)
+    except ValueError:
+        print('control(9, 1, 2, 3, 4): ValueError')
 
 
 runTests()
