@@ -107,7 +107,7 @@ def control(a, x, y, z, k):
         '2': subtraction(x, y),
         '3': multiplication(x, y),
         '4': division(x, y),
-        #'5': modulo(x, y),
+        '5': modulo(x, y),
         '6': power(x, y),
         '8': secondRadix(x),
         '9': magic(x, y, z, k),
