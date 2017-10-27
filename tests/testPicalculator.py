@@ -26,3 +26,8 @@ def testNilakanthaPi(iterations):
         print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
         print('testNilakanthaPi(1), expected: ' + str(expected) + ' actual: ' + str(result))
         print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
+
+
+testLeibnizPi(5000000)
+testNilakanthaPi(1)
+testNewtonPi(-3.0)
