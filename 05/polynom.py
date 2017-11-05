@@ -10,7 +10,7 @@ def polyEval(poly, x):
 
 def polySum(poly1, poly2):
     result = []
-    isnotfirst = True
+    isnotfirst = False
 
     if len(poly1) > len(poly2):
         i = len(poly1)
@@ -24,6 +24,7 @@ def polySum(poly1, poly2):
 
             else:
                 result.append(poly1[i])
+                isnotfirst = True
 
     else:
         i = len(poly2)
@@ -37,6 +38,7 @@ def polySum(poly1, poly2):
 
             else:
                 result.append(poly2[i])
+                isnotfirst = True
 
     result.reverse()
     return result
@@ -72,6 +74,13 @@ def runTests():
 
     result = polySum([1, 2, 5], [2, 0, 1, -7])
     expected = [3, 2, 6, -7]
+    if result != expected:
+        print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
+        print('polySum([1, 2, 5], [2, 0, 1, -7]), expected: ' + str(expected) + ' actual: ' + str(result))
+        print('*/*/*/*/* UNEXPECTED RESULT */*/*/*/*\n')
+
+    result = polySum([1, 2.5, 3.5, 0, 5.4], [-1, -3.5, -3.5, 0, -5.4])
+    expected = [0, -1.0]
     if result != expected:
         print('\n*/*/*/*/* UNEXPECTED RESULT */*/*/*/*')
         print('polySum([1, 2, 5], [2, 0, 1, -7]), expected: ' + str(expected) + ' actual: ' + str(result))
