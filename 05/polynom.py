@@ -1,23 +1,45 @@
 def polyEval(poly, x):
     result = 0
-    i = len(poly) - 1
-    while i > -1:
-        result = result * x + poly[i]
+    i = len(poly)
+    while i > 0:
         i -= 1
+        result = result * x + poly[i]
 
     return result
 
 
 def polySum(poly1, poly2):
+    result = []
+    isnotfirst = True
+
     if len(poly1) > len(poly2):
-        for i in range(len(poly2)):
-            poly1[i] += poly2[i]
-        return poly1
+        i = len(poly1)
+        while i > 0:
+            i -= 1
+            if i < len(poly2):
+                coefficient = poly1[i] + poly2[i]
+                if coefficient != 0 or isnotfirst:
+                    result.append(coefficient)
+                    isnotfirst = True
+
+            else:
+                result.append(poly1[i])
 
     else:
-        for i in range(len(poly1)):
-            poly2[i] += poly1[i]
-        return poly2
+        i = len(poly2)
+        while i > 0:
+            i -= 1
+            if i < len(poly1):
+                coefficient = poly1[i] + poly2[i]
+                if coefficient != 0 or isnotfirst:
+                    result.append(coefficient)
+                    isnotfirst = True
+
+            else:
+                result.append(poly2[i])
+
+    result.reverse()
+    return result
 
 
 def polyMultiply(poly1, poly2):
