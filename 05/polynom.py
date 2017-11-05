@@ -44,12 +44,13 @@ def polySum(poly1, poly2):
 
 def polyMultiply(poly1, poly2):
     result = []
+
     for i in range(len(poly1) + len(poly2) - 1):
         result.append(0)
 
     for i in range(len(poly1)):
         for j in range(len(poly2)):
-            result[i + j] = poly1[i] * poly2[j]
+            result[i + j] += poly1[i] * poly2[j]
 
     return result
 
