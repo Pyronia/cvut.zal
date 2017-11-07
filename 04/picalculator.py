@@ -53,6 +53,7 @@ def nilakanthaPi(iterations):
     print('Iterations = ' + str(iterations))
     return pi
 
+
 def testNewtonPi(init):
     print("\nTest Newton Pi:")
     print("\nPi = " + str(newtonPi(init)))
