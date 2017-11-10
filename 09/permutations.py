@@ -3,7 +3,7 @@ def process(left, right, result=[]):
         result.append(right)
     else:
         for i in range(len(left)):
-            process(left[0:i] + left[i + 1:], [left[i]] + right, result)
+            process(left[:i] + left[i + 1:], [left[i]] + right, result)
 
 
 def permutations(array):
