@@ -1,13 +1,13 @@
 class Node:
-    def __init__(self, nextNode, prevNode, car):
-        self.nextNode = nextNode
+    def __init__(self, prevNode=None, nextNode=None, car=None):
         self.prevNode = prevNode
+        self.nextNode = nextNode
         self.car = car
 
 
 class LinkedList:
     def __init__(self):
-        pass
+        self.head = None
 
 
 class Car:
@@ -23,11 +23,27 @@ db = LinkedList()
 
 
 def init(cars):
-    pass
+    clean()
+    for car in cars:
+        add(car)
+
+
+# def isCarValid(car):
+#     if car.identification is None or car.name is None or car.brand is None or car.price is None or car.active is None:
+#         return False
+#     else:
+#         return True
 
 
 def add(car):
-    pass
+    item = getDatabaseHead()
+    previousItem = None
+
+    if item is None:
+        item = Node()
+        item.car = car
+        if previousItem is not None:
+            item.prevNode = previousItem
 
 
 def updateName(identification, name):
@@ -47,11 +63,11 @@ def deactivateCar(identification):
 
 
 def getDatabaseHead():
-    pass
+    return db.head
 
 
 def getDatabase():
-    pass
+    return db
 
 
 def calculateCarPrice():
