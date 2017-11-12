@@ -2,7 +2,7 @@ class Node:
     def __init__(self, car=None, prevNode=None, nextNode=None):
         self.prevNode = prevNode
         self.nextNode = nextNode
-        self.car = car
+        self.data = car
 
 
 class LinkedList:
@@ -22,6 +22,10 @@ class Car:
 db = LinkedList()
 
 
+def clean():
+    db.head = None
+
+
 def init(cars):
     clean()
     for car in cars:
@@ -33,18 +37,21 @@ def add(car):
         db.head = Node(car)
 
     else:
-        prevItem = db.head
-        item = db.head.nextNode
+        prevItem = None
+        item = db.head
         while True:
             if item is None:
                 item = Node(car, prevItem)
                 prevItem.nextNode = item
                 break
 
-            elif item.car.price > car.price:
+            elif item.data.price > car.price:
                 newItem = Node(car, prevItem, item)
                 item.prevNode = newItem
-                prevItem.nextNode = newItem
+                if prevItem is not None:
+                    prevItem.nextNode = newItem
+                else:
+                    db.head = newItem
                 break
 
             else:
@@ -53,19 +60,51 @@ def add(car):
 
 
 def updateName(identification, name):
-    pass
+    item = db.head
+    while True:
+        if item is None:
+            return None
+        elif item.data.identification == identification:
+            item.data.name = name
+            return
+        else:
+            item = item.nextNode
 
 
 def updateBrand(identification, brand):
-    pass
+    item = db.head
+    while True:
+        if item is None:
+            return None
+        elif item.data.identification == identification:
+            item.data.brand = brand
+            return
+        else:
+            item = item.nextNode
 
 
 def activateCar(identification):
-    pass
+    item = db.head
+    while True:
+        if item is None:
+            return None
+        elif item.data.identification == identification:
+            item.data.active = True
+            return
+        else:
+            item = item.nextNode
 
 
 def deactivateCar(identification):
-    pass
+    item = db.head
+    while True:
+        if item is None:
+            return None
+        elif item.data.identification == identification:
+            item.data.active = False
+            return
+        else:
+            item = item.nextNode
 
 
 def getDatabaseHead():
@@ -81,16 +120,12 @@ def calculateCarPrice():
     item = db.head
 
     while item is not None:
-        if item.car.active:
-            sumPrice += item.car.price
+        if item.data.active:
+            sumPrice += item.data.price
 
         item = item.nextNode
 
     return sumPrice
-
-
-def clean():
-    pass
 
 
 def printDatabase():
@@ -105,12 +140,12 @@ def printDatabase():
         i += 1
         print('\nPrinting ' + str(i) + '. car:')
 
-        if element.car is not None:
-            print('\tidentification = ' + str(element.car.identification))
-            print('\tname = ' + str(element.car.name))
-            print('\tbrand = ' + str(element.car.brand))
-            print('\tprice = ' + str(element.car.price))
-            print('\tactive = ' + str(element.car.active))
+        if element.data is not None:
+            print('\tidentification = ' + str(element.data.identification))
+            print('\tname = ' + str(element.data.name))
+            print('\tbrand = ' + str(element.data.brand))
+            print('\tprice = ' + str(element.data.price))
+            print('\tactive = ' + str(element.data.active))
 
         else:
             print('\t' + str(i) + '. car is None')
@@ -122,10 +157,14 @@ def printDatabase():
 
 
 def initDatabase():
-    audi = Car(1, 'R8', 'Audi', 200, True)
-    volkswagen = Car(3, 'Passat', 'Volkswagen', 300, True)
-    ford = Car(2, 'Mustang', 'Ford', 250, True)
-    init([audi, volkswagen, ford])
+    # audi = Car(1, 'R8', 'Audi', 200, True)
+    # volkswagen = Car(3, 'Passat', 'Volkswagen', 300, True)
+    # ford = Car(2, 'Mustang', 'Ford', 250, True)
+    # init([audi, volkswagen, ford])
+    first = Car(1, 'Octavia', 'Skoda', 123000, True)
+    second = Car(23, 'Felicia', 'Skoda', 5000, True)
+    third = Car(11, 'Superb', 'Skoda', 54000, True)
+    init([first, second, third])
 
 
 initDatabase()
