@@ -1,33 +1,36 @@
 class Node:
-    def __init__(self, nextNode, prevNode, car):
-        self.nextNode = nextNode
+    def __init__(self, car=None, prevNode=None, nextNode=None):
         self.prevNode = prevNode
+        self.nextNode = nextNode
         self.car = car
 
 
 class LinkedList:
     def __init__(self):
-        pass
+        self.head = None
 
 
 class Car:
     def __init__(self, identification, name, brand, price, active):
-        self.identification = identification
-        self.name = name
-        self.brand = brand
-        self.price = price
-        self.active = active
+        self.identification = int(identification)
+        self.name = str(name)
+        self.brand = str(brand)
+        self.price = int(price)
+        self.active = bool(active)
 
 
 db = LinkedList()
 
-
 def init(cars):
-    pass
+    clean()
+    for car in cars:
+        add(car)
 
 
 def add(car):
-    pass
+    head = getDatabaseHead()
+    if head is None:
+        head = Node(car)
 
 
 def updateName(identification, name):
@@ -47,11 +50,11 @@ def deactivateCar(identification):
 
 
 def getDatabaseHead():
-    pass
+    return db.head
 
 
 def getDatabase():
-    pass
+    return db
 
 
 def calculateCarPrice():
@@ -60,3 +63,37 @@ def calculateCarPrice():
 
 def clean():
     pass
+
+def printDatabase():
+    element = db.head
+    i = 0
+
+    while True:
+        i += 1
+        print('\nPrinting ' + str(i) + '. car:')
+
+        if element.car is not None:
+            print('\tidentification = ' + str(element.car.identification))
+            print('\tname = ' + str(element.car.name))
+            print('\tbrand = ' + str(element.car.brand))
+            print('\tprice = ' + str(element.car.price))
+            print('\tactive = ' + str(element.car.active))
+
+        else:
+            print('\t' + str(i) + '. car is None')
+
+        if element.nextNode is None:
+            break
+        else:
+            element = element.nextNode
+
+
+def initDatabase():
+    audi = Car(1, 'R8', 'Audi', 200, True)
+    volkswagen = Car(3, 'Passat', 'Volkswagen', 300, True)
+    ford = Car(2, 'Mustang', 'Ford', 250, True)
+    init([audi, volkswagen, ford])
+
+
+initDatabase()
+printDatabase()
