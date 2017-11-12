@@ -21,6 +21,7 @@ class Car:
 
 db = LinkedList()
 
+
 def init(cars):
     clean()
     for car in cars:
@@ -28,9 +29,25 @@ def init(cars):
 
 
 def add(car):
-    head = getDatabaseHead()
-    if head is None:
-        head = Node(car)
+    if getDatabaseHead() is None:
+        db.head = Node(car)
+
+    else:
+        prevItem = db.head
+        item = db.head.nextNode
+        while True:
+            if item is None:
+                item = Node(car, prevItem)
+                prevItem.nextNode = item
+                break
+
+            else:
+                prevItem = item
+                item = item.nextNode
+
+
+
+
 
 
 def updateName(identification, name):
@@ -66,6 +83,10 @@ def clean():
 
 def printDatabase():
     element = db.head
+
+    if element is None:
+        return
+
     i = 0
 
     while True:
