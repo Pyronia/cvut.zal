@@ -41,13 +41,15 @@ def add(car):
                 prevItem.nextNode = item
                 break
 
+            elif item.car.price > car.price:
+                newItem = Node(car, prevItem, item)
+                item.prevNode = newItem
+                prevItem.nextNode = newItem
+                break
+
             else:
                 prevItem = item
                 item = item.nextNode
-
-
-
-
 
 
 def updateName(identification, name):
