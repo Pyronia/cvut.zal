@@ -77,11 +77,21 @@ def getDatabase():
 
 
 def calculateCarPrice():
-    pass
+    sumPrice = 0
+    item = db.head
+
+    while item is not None:
+        if item.car.active:
+            sumPrice += item.car.price
+
+        item = item.nextNode
+
+    return sumPrice
 
 
 def clean():
     pass
+
 
 def printDatabase():
     element = db.head
@@ -120,3 +130,4 @@ def initDatabase():
 
 initDatabase()
 printDatabase()
+print('\nsum = ' + str(calculateCarPrice()))
