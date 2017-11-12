@@ -156,17 +156,17 @@ def printDatabase():
             element = element.nextNode
 
 
-def initDatabase():
-    # audi = Car(1, 'R8', 'Audi', 200, True)
-    # volkswagen = Car(3, 'Passat', 'Volkswagen', 300, True)
-    # ford = Car(2, 'Mustang', 'Ford', 250, True)
-    # init([audi, volkswagen, ford])
-    first = Car(1, 'Octavia', 'Skoda', 123000, True)
-    second = Car(23, 'Felicia', 'Skoda', 5000, True)
-    third = Car(11, 'Superb', 'Skoda', 54000, True)
-    init([first, second, third])
-
-
-initDatabase()
-printDatabase()
-print('\nsum = ' + str(calculateCarPrice()))
+# def initDatabase():
+#     audi = Car(1, 'R8', 'Audi', 200, True)
+#     volkswagen = Car(3, 'Passat', 'Volkswagen', 300, True)
+#     ford = Car(2, 'Mustang', 'Ford', 250, True)
+#     init([audi, volkswagen, ford])
+#     first = Car(1, 'Octavia', 'Skoda', 123000, True)
+#     second = Car(23, 'Felicia', 'Skoda', 5000, True)
+#     third = Car(11, 'Superb', 'Skoda', 54000, True)
+#     init([first, second, third])
+#
+#
+# initDatabase()
+# printDatabase()
+# print('\nsum = ' + str(calculateCarPrice()))
