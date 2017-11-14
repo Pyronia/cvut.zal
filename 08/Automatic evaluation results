@@ -1,0 +1,82 @@
+Automatic evaluation results
+
+Start testing student solution
+
+Importing: bst.py
+
+File imported: bst.py
+
+Start testing bst for array of size: 10
+
+Start testing Build binary tree fromArray with data:[-6962, -4772, 9199, -1669, 1541, -8199, 1849, 9907, -3819, -5789] 
+
+Great testing Build binary tree fromArray passed! 
+
+Start testing search with data:-6962 
+
+Start testing visitedNode
+
+Great testing visitedNode passed! 
+
+Great testing search passed! 
+
+Start testing search with data:-4772 
+
+Start testing visitedNode
+
+Great testing visitedNode passed! 
+
+Great testing search passed! 
+
+Start testing search with data:9199 
+
+Start testing visitedNode
+
+Great testing visitedNode passed! 
+
+Great testing search passed! 
+
+Start testing search with data:-1669 
+
+Start testing visitedNode
+
+Great testing visitedNode passed! 
+
+Great testing search passed! 
+
+Start testing search with data:1541 
+
+Start testing visitedNode
+
+Great testing visitedNode passed! 
+
+Great testing search passed! 
+
+Start testing search with data:3823838281 
+
+Great testing search passed! 
+
+Start testing visitedNode
+
+Error results are not the same! Teacher: 4 .Students: 5
+
+Testing visitedNode failed! 
+
+Great testing visitedNode passed! 
+
+Start testing search with data:-999999999 
+
+
+
+Testing finished - with following exception: [-6962, -4772, 9199, -1669, 1541, -8199, 1849, 9907, -3819, -5789]
+
+9907
+9199
+1849
+1541
+-1669
+-3819
+-4772
+-5789
+-6962
+-8199
