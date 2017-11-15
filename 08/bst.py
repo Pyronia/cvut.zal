@@ -52,9 +52,8 @@ class BinarySearchTree:
             self.insert(value)
 
     def search(self, value):
-
-        if self.lastSearchedValue == 3823838281:
-            raise Exception(str(self.data) + '\n' + str(self.parent))
+        # if self.lastSearchedValue == 3823838281:
+        #     raise Exception(str(self.data) + '\n' + str(self.parent))
 
         self.lastSearchedValue = value
         item = self.parent
@@ -109,7 +108,6 @@ class BinarySearchTree:
 
 
 def runTests():
-    pass
     print('\nBST 01:')
     bst1 = BinarySearchTree()
 
@@ -147,6 +145,7 @@ def runTests():
     print(bst3.visitedNodes())
     print(bst3.parent)
 
+    print('\nBST 04:')
     bst4 = BinarySearchTree()
     bst4.fromArray([-6962, -4772, 9199, -1669, 1541, -8199, 1849, 9907, -3819, -5789])
     print(bst4.parent)
