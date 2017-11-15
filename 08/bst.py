@@ -22,11 +22,9 @@ class BinarySearchTree:
     def __init__(self):
         self.parent = None
         self.lastDepth = 0
-        self.data = []
         self.lastSearchedValue = 0
 
     def insert(self, value):
-        self.data += [value]
 
         if self.parent is None:
             self.parent = Node(value)
@@ -52,9 +50,6 @@ class BinarySearchTree:
             self.insert(value)
 
     def search(self, value):
-        # if self.lastSearchedValue == 3823838281:
-        #     raise Exception(str(self.data) + '\n' + str(self.parent))
-
         self.lastSearchedValue = value
         item = self.parent
         depth = 0
@@ -71,6 +66,7 @@ class BinarySearchTree:
                 else:
                     item = item.right
 
+        self.lastDepth = depth
         return False
 
     def min(self):
@@ -83,9 +79,7 @@ class BinarySearchTree:
             value = item.value
             item = item.left
 
-        if depth != 0:
-            self.lastDepth = depth
-
+        self.lastDepth = depth
         return value
 
     def max(self):
@@ -98,9 +92,7 @@ class BinarySearchTree:
             value = item.value
             item = item.right
 
-        if depth != 0:
-            self.lastDepth = depth
-
+        self.lastDepth = depth
         return value
 
     def visitedNodes(self):
@@ -149,6 +141,25 @@ def runTests():
     bst4 = BinarySearchTree()
     bst4.fromArray([-6962, -4772, 9199, -1669, 1541, -8199, 1849, 9907, -3819, -5789])
     print(bst4.parent)
+
+    print('\nBST 05:')
+    bst5 = BinarySearchTree()
+    bst5.fromArray([5, 3, 1, 4, 7, 6, 8])
+
+    print(bst5.search(10))
+    print(bst5.visitedNodes())
+    print(bst5.search(5))
+    print(bst5.visitedNodes())
+    print(bst5.search(7))
+    print(bst5.visitedNodes())
+    print(bst5.search(6))
+    print(bst5.visitedNodes())
+
+    print("MIN: " + str(bst5.min()))
+    print(bst5.visitedNodes())
+    print("MAX: " + str(bst5.max()))
+    print(bst5.visitedNodes())
+    print(bst5.parent)
 
 
 runTests()
