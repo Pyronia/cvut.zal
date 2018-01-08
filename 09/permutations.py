@@ -12,7 +12,7 @@ def permutations(array):
     return result
 
 
-# print(permutations(['a', 'b', 'c']))
-# print(permutations([1, 2, 3]))
-# print(permutations([1]))
-# print(permutations([]))
+print(permutations(['a', 'b', 'c']))
+print(permutations([1, 2, 3]))
+print(permutations([1]))
+print(permutations([]))
