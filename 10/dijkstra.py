@@ -1,6 +1,9 @@
+import heapq
+
+
 class Vertex:
-    def __init__(self, id, name):
-        self.id = id
+    def __init__(self, identification, name):
+        self.id = identification
         self.name = name
         self.minDistance = float('Inf')
         self.previousVertex = None
@@ -9,6 +12,18 @@ class Vertex:
     def addEdge(self, edge):
         self.edges.append(edge)
 
+    def __str__(self):
+        return "id = " + str(self.id) + ", name = " + str(self.name) + ", minDistance = " + str(self.minDistance)
+
+    def __repr__(self):
+        return "id = " + str(self.id) + ", name = " + str(self.name) + ", minDistance = " + str(self.minDistance)
+
+    def __lt__(self, other):
+        return self.minDistance < other.minDistance
+
+    def __gt__(self, other):
+        return self.minDistance > other.minDistance
+
 
 class Edge:
     def __init__(self, source, target, weight):
@@ -16,40 +31,29 @@ class Edge:
         self.target = target
         self.weight = weight
 
-
-class Node:
-    def __init__(self, vertex, prevNode=None, nextNode=None):
-        self.prevNode = prevNode
-        self.nextNode = nextNode
-        self.vertex = vertex
-
-
-class Fifo:
-    def __init__(self):
-        self.head = None
-        self.tail = None
-
-    # lower distance => higher priority
-    def addWithPriority(self, vertex, distance):
-        if self.head is None:
-            self.head = Node(vertex)
-            self.tail = self.head
-
-    def decreasePriority(self):
-        pass
-
-    def extractMin(self):
-        pass
+    def __repr__(self):
+        return "(" + str(self.source) + ", " + str(self.target) + ", " + str(self.weight) + ")"
 
 
 class Dijkstra:
     def __init__(self):
         self.vertexes = []
 
-    def resetDijkstra(self):
+    def createGraph(self, vertexes, edges):
+        for vertex in vertexes:
+            for edge in edges:
+                if vertex.id == edge.source:
+                    vertex.addEdge(edge)
+
+        self.vertexes = vertexes
+
+    def getVertexes(self):
+        return self.vertexes
+
+    def getVertexById(self, vertexId):
         for vertex in self.vertexes:
-            vertex.minDistance = float('Inf')
-            vertex.previousVertex = None
+            if vertex.id == vertexId:
+                return vertex
 
     def computePath(self, sourceId):
         self.resetDijkstra()
@@ -60,26 +64,36 @@ class Dijkstra:
                 vertex.minDistance = 0
                 break
 
+        heap = []
+        for vertex in self.vertexes:
+            heapq.heappush(heap, (vertex.minDistance, vertex))
 
+        while heap:
+            priority, vertex = heapq.heappop(heap)
+            for edge in vertex.edges:
+                alt = priority + edge.weight
+                neighbour = self.getVertexById(edge.target)
+                if alt < neighbour.minDistance:
+                    neighbour.minDistance = alt
+                    neighbour.previousVertex = vertex
+                    heapq.heappush(heap, (alt, neighbour))
 
     def getShortestPathTo(self, targetId):
+        path = []
+        vertex = self.getVertexById(targetId)
+        path.append(vertex)
+        while vertex.previousVertex:
+            path.append(vertex.previousVertex)
+            vertex = vertex.previousVertex
+
+        path.reverse()
+        return path
+
+
+    def resetDijkstra(self):
         for vertex in self.vertexes:
-            if vertex.id == targetId:
-                return vertex.minDistance
-
-        return None
-
-    def createGraph(self, vertexes, edges):
-        for vertex in vertexes:
-            for edge in edges:
-                if vertex.id == edge.source:
-                    vertex.addEdge(edge)
-                    edges.remove(edge)
-
-        self.vertexes = vertexes
-
-    def getVertexes(self):
-        return self.vertexes
+            vertex.minDistance = float('Inf')
+            vertex.previousVertex = None
 
 
 def runTests():
@@ -99,6 +113,17 @@ def runTests():
 
     dijkstra = Dijkstra()
     dijkstra.createGraph(vertexes, edges)
+    dijkstra.computePath(1)
+    vertexes = dijkstra.getVertexes()
+
+    for vertex in vertexes:
+        print("Vertex: " + str(vertex.id))
+        print(vertex.minDistance)
+        print()
+
+    print(dijkstra.getShortestPathTo(4))
+
+
 
 
 runTests()
